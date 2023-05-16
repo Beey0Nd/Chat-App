@@ -1,13 +1,24 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { arrayToMap, mapToArray } from "../../utils";
+import classes from "./Recipient.module.css"
 
 function Recipient({ setRecipient }) {
+    const [hasError, setHasError] = useState(false)
     const telRef = useRef();
     const chatsList = JSON.parse(localStorage.getItem("chatsList"))
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const tel = telRef.current.value
+        setHasError(false)
+
+        const tel = telRef.current.value.trim()
+
+        telRef.current.value = ""
+
+        if (!tel || tel.length < 11) {
+            setHasError(true)
+            return
+        }
 
         if (chatsList) {
             const chatListMap = arrayToMap(chatsList)
@@ -28,10 +39,13 @@ function Recipient({ setRecipient }) {
 
 
     return (
-        <form onSubmit={handleSubmit} className="recipient">
-            <input ref={telRef} type="tel" />
-            <button type="submit">Установить получателя</button>
-        </form>
+        <section className={"recipient " + classes.recipient}>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="input">{hasError ? "Проверьте правильность введенного номера" : "Введите номер телефона получателя"}</label>
+                <input id="input" ref={telRef} type="tel" />
+                <button type="submit">Установить получателя</button>
+            </form>
+        </section>
     );
 }
 

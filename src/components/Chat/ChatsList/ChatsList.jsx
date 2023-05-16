@@ -1,10 +1,10 @@
 import ChatsListItem from "./ChatsListItem";
 
-function ChatsList({setRecipient}) {
+function ChatsList({ setRecipient }) {
     const chatsList = JSON.parse(localStorage.getItem("chatsList"))
 
-    if(!chatsList) {
-        return(
+    if (!chatsList) {
+        return (
             <div>
                 <p>Список активных чатов пуст</p>
             </div>
@@ -16,7 +16,7 @@ function ChatsList({setRecipient}) {
             {chatsList.map(chat => {
                 const tel = chat[1].tel
                 return (
-                    <ChatsListItem key={tel} 
+                    <ChatsListItem key={tel}
                         tel={tel}
                         setRecipient={setRecipient}
                     />

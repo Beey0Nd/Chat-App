@@ -1,8 +1,5 @@
 import { useRef } from "react";
-
-// const _idInstance = 1101819760
-// const _apiTokenInstance = "cc7581f4fdb54744a3c3fd8c035c18d4bc356eb789504c9cb2"
-
+import classes from "./Authorization.module.css"
 
 function Authorization({ setCredentials }) {
     const idInstanceRef = useRef();
@@ -22,17 +19,19 @@ function Authorization({ setCredentials }) {
     }
 
     return (
-        <form onSubmit={submitCredentials}>
-            <div>
-                <label htmlFor="idInstance">Введите idInstance</label>
-                <input ref={idInstanceRef} type="text" id="idInstance" />
-            </div>
-            <div>
-                <label htmlFor="apiTokenInstance">Введите apiTokenInstance</label>
-                <input ref={apiTokenRef} type="text" id="apiTokenInstance" />
-            </div>
-            <button type="submit">Авторизоваться</button>
-        </form>
+        <section className={"authorization " + classes.authorization}>
+            <form onSubmit={submitCredentials}>
+                <div>
+                    <label htmlFor="idInstance">Введите idInstance</label>
+                    <input ref={idInstanceRef} type="text" id="idInstance" />
+                </div>
+                <div>
+                    <label htmlFor="apiTokenInstance">Введите apiTokenInstance</label>
+                    <input ref={apiTokenRef} type="text" id="apiTokenInstance" />
+                </div>
+                <button type="submit">Авторизоваться</button>
+            </form>
+        </section>
     );
 }
 

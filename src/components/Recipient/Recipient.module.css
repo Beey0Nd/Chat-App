@@ -1,0 +1,39 @@
+.recipient form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: var(--green-200);
+    box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.5);
+}
+
+.recipient label {
+    color: white;
+    margin-bottom: .25rem;
+    user-select: none;
+}
+
+.recipient input {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 1rem;
+}
+
+.recipient button {
+    align-self: center;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all .25s;
+    background: white;
+    font-size: large;
+}
+
+.recipient button:hover {
+    background: #5f61a9;
+    color: white;
+}

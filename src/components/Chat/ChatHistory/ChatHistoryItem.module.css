@@ -1,0 +1,14 @@
+.message {
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 2rem;
+    background: #5f61a9;
+}
+
+.incoming {
+    align-self: flex-start;
+}
+
+.outgoing {
+    align-self: flex-end;
+}

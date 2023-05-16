@@ -13,24 +13,21 @@ export function setupCredentials(_idInstance, _apiTokenInstance) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-            }).then(console.log).catch(console.log)
+            })
+            .then(console.log)
+            .catch(err => {
+                console.log("An error occured while sending a message", err)
+            })
         }
 
         async function getNotification() {
-            const requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-            };
-              
-            const notification = await fetch(`https://api.green-api.com/waInstance${_idInstance}/receiveNotification/${_apiTokenInstance}`, requestOptions)
-            .then(response => response.json())
-            .catch(error => console.log('error', error))
-            if(!notification) {
-                console.log("Notificaiton list is empty")
-                return
+            const notification = await fetch(`https://api.green-api.com/waInstance${_idInstance}/ReceiveNotification/${_apiTokenInstance}`)
+            .then(res => res.json())
+            .catch(err => console.log('An error occurred while fetching a notification', err))
+
+            if(notification) {
+                deleteNotification(notification.receiptId)
             } 
-            deleteNotification(notification.receiptId)
-            console.log(notification);
 
             return notification
         }
@@ -41,36 +38,11 @@ export function setupCredentials(_idInstance, _apiTokenInstance) {
                 redirect: 'follow'
             })
             .then(response => response.json())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error))
+            .catch(error => console.log('An error occurred while trying to delete a notification', error))
         }
-
-        async function getChatHistory() {
-            const messages = await fetch(`https://api.green-api.com/waInstance${_idInstance}/GetChatHistory/${_apiTokenInstance}`, {
-                method: "POST",
-                body: JSON.stringify({
-                    chatId
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(res => {
-                if (res.ok) {
-                    return res
-                } else {
-                    throw new Error(res.statusText)
-                }
-            }).then(res => res.json()).catch(e => {
-                console.log(e)
-            })
-
-            return messages;
-        }
-
         return {
             sendMessage,
-            getNotification,
-            getChatHistory
+            getNotification
         };
     }
 

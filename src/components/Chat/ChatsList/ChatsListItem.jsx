@@ -1,5 +1,4 @@
-function ChatsListItem({tel, setRecipient}) {
-    // props = {sender, lastMessage}
+function ChatsListItem({ tel, setRecipient }) {
 
     const handleClick = () => {
         setRecipient(tel)
@@ -7,7 +6,7 @@ function ChatsListItem({tel, setRecipient}) {
 
     return (
         <li onClick={handleClick}>
-            Абонент {tel}
+            Контакт {tel}
         </li>
     );
 }

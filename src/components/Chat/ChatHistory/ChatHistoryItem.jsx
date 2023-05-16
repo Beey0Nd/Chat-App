@@ -1,7 +1,9 @@
-function ChatHistoryItem({textMessage}) {
+import classes from "./ChatHistoryItem.module.css"
+
+function ChatHistoryItem({ message, type }) {
     return (
-        <li>
-            {textMessage}
+        <li className={`message ${type === "incoming" ? classes.incoming : classes.outgoing}`}>
+            {message}
         </li>
     );
 }

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { setupCredentials } from "../../../api/api";
 
-function NewChatMessage({credentials, recipient}) {
+function NewChatMessage({ setMessages, credentials, recipient }) {
     const { _idInstance, _apiTokenInstance } = credentials
     const useAPI = setupCredentials(_idInstance, _apiTokenInstance);
     const { sendMessage } = useAPI(recipient);
@@ -12,15 +12,26 @@ function NewChatMessage({credentials, recipient}) {
     function submitSending(e) {
         e.preventDefault();
 
-        const message = messageRef.current.value;
-        sendMessage(message)
+        const message = messageRef.current.value.trim();
+        if (message) {
+            setMessages(prevState => {
+                return [...prevState, {
+                    recipient, message, type: "outgoing"
+                }]
+            })
+            sendMessage(message)
+        }
 
         formRef.current.reset()
     }
 
     return (
         <form ref={formRef} onSubmit={submitSending}>
-            <textarea ref={messageRef} name="message" placeholder='Type your message'></textarea>
+            <input
+                ref={messageRef}
+                name="message"
+                placeholder='Type your message'
+            />
             <button type="submit">Send Message</button>
         </form>
     );
