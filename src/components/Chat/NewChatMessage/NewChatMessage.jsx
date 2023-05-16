@@ -30,9 +30,9 @@ function NewChatMessage({ setMessages, credentials, recipient }) {
             <input
                 ref={messageRef}
                 name="message"
-                placeholder='Type your message'
+                placeholder='Введите сообщение'
             />
-            <button type="submit">Send Message</button>
+            <button type="submit">Отправить</button>
         </form>
     );
 }
